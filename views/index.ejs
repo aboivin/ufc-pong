@@ -1,0 +1,47 @@
+<html>
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io('/games/<%= gameId %>');
+    </script>
+    <script type="text/javascript" src="/static/gl-matrix.js"></script>
+    <style>
+        #container {
+            position: relative;
+            height: 800px;
+            width: 800px;
+        }
+
+        #container canvas {
+            position: absolute;
+            border: none;
+        }
+
+        #container #overlay {
+            position: absolute;
+            width: 800px;
+            height: 600px;
+            color: white;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+<div id="container">
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <div id="overlay"></div>
+</div>
+<div>
+    <button id="newGameButton">New game</button>
+    <input type="text" placeholder="Player name" id="nickname">
+    <button id="joinGameButton">Join</button>
+    <div id="score"></div>
+</div>
+
+<script type="text/javascript" src="/static/ufc-pong.min.js"></script>
+</body>
+</html>

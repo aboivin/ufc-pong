@@ -1,0 +1,9 @@
+runtime: nodejs
+env: flex
+service: ufc-pong
+
+manual_scaling:
+  instances: 1
+
+network:
+  session_affinity: true
