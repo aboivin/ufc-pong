@@ -1,4 +1,4 @@
-const ACCELERATION = 1.03;
+const ACCELERATION = 1.1;
 const ELIMINATION_DISTANCE = 20;
 
 const handleBallWithPlayerCollision = (player, ball, direction) => {
@@ -23,6 +23,7 @@ const handleBallWithPlayerCollision = (player, ball, direction) => {
         vec3.scale(ball.velocity, ball.velocity, ACCELERATION);
         const newPosition = vec2.rotate(vec3.fromValues(0, 0, 0), [(ball.radius + (player.width / 2.0)) * direction, projectedBallLocation[1], 0], [0, 0], player.angle);
         ball.translateTo([player.location[0] + newPosition[0], player.location[1] + newPosition[1]]);
+        wsEmitBallLocation(ball, player.id);
     }
 };
 
@@ -59,11 +60,11 @@ const handlePlayerRange = (canvas, player) => {
 };
 
 const handleCollision = (canvas, players, ball, eliminationHandler) => {
-    for (let player of Object.values(players)) {
-        handlePlayerRange(canvas, player);
-        handleBallWithPlayerCollision(player, ball, 1);
-        handleBallWithPlayerCollision(player, ball, -1);
-        handleElimination(player, ball, eliminationHandler);
+    if(players[currentPlayerId] != null) {
+        handlePlayerRange(canvas, players[currentPlayerId]);
+        handleBallWithPlayerCollision(players[currentPlayerId], ball, 1);
+        handleBallWithPlayerCollision(players[currentPlayerId], ball, -1);
+        handleElimination(players[currentPlayerId], ball, eliminationHandler);
     }
     handleBallWithCanvasCollision();
 };

@@ -1,5 +1,5 @@
 class Player {
-    constructor(id, startLocation, angle, color, nickname, range, score, isHost, isAlive) {
+    constructor(id, startLocation, angle, color, nickname, range, score, isAlive) {
         this.id = id;
         this.startLocation = [...startLocation];
         this.location = [...startLocation];
@@ -14,7 +14,6 @@ class Player {
         this.angle = angle;
         this.drawingMode = gl.TRIANGLE_STRIP;
         this.score = score;
-        this.isHost = isHost;
         this.isAlive = isAlive;
         this.lastUpdate = new Date().getTime();
 

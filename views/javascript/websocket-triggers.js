@@ -6,11 +6,12 @@ const wsEmitMove = (player) => {
     });
 };
 
-const wsEmitBallLocation = (ball) => {
+const wsEmitBallLocation = (ball, playerId) => {
     socket.emit('ball-location', {
         location: ball.location,
         velocity: ball.velocity,
-        mvMatrix: ball.mvMatrix
+        mvMatrix: ball.mvMatrix,
+        playerId
     });
 };
 

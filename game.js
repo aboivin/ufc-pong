@@ -37,13 +37,11 @@ class Game {
                 this.players[player.id].location = position.location;
                 this.players[player.id].range = position.range;
                 this.players[player.id].angle = position.angle;
-                this.players[player.id].isHost = position.isHost;
                 i++;
             } else {
                 this.players[player.id].location = [];
                 this.players[player.id].range = 500;
                 this.players[player.id].angle = 0;
-                this.players[player.id].isHost = false;
             }
         }
 
@@ -55,7 +53,7 @@ class Game {
             this.ball.location = msg.location;
             this.ball.velocity = msg.velocity;
             this.ball.mvMatrix = msg.mvMatrix;
-            this.gameRoom.emit('ball-sync', this.ball);
+            this.gameRoom.emit('ball-sync', { ball: this.ball, playerId: msg.playerId });
         });
     }
 
@@ -69,7 +67,6 @@ class Game {
 
     listenToPlayerPing(socket) {
         socket.on('ping-request', msg => {
-            console.log('ping received', msg);
             socket.emit('ping-response', msg);
         });
     }
@@ -131,22 +128,22 @@ class Game {
     }
 }
 
-const buildPlayer = (id, location, range, color, nickname, angle, isHost) => {
-    return {id, score: 0, location, range, angle, color, nickname, isHost, direction: 0, isAlive: false};
+const buildPlayer = (id, location, range, color, nickname, angle) => {
+    return {id, score: 0, location, range, angle, color, nickname, direction: 0, isAlive: false};
 };
 
 const gamePositions = {
     0: [],
-    1: [{location: [100.0, 400.0, 0.0], range: 700, angle: 0, isHost: true}],
-    2: [{location: [100.0, 400.0, 0.0], range: 700, angle: 0, isHost: true},
-        {location: [700.0, 400.0, 0.0], range: 700, angle: Math.PI, isHost: false}],
-    3: [{location: [400.0, 600.0, 0.0], range: 600, angle: -Math.PI / 2, isHost: true},
-        {location: [250.0, 300.0, 0.0], range: 600, angle: Math.PI / 6, isHost: false},
-        {location: [550.0, 300.0, 0.0], range: 600, angle: Math.PI * 5 / 6, isHost: false}],
-    4: [{location: [100.0, 400.0, 0.0], range: 700, angle: 0, isHost: true},
-        {location: [700.0, 400.0, 0.0], range: 700, angle: Math.PI, isHost: false},
-        {location: [400.0, 100.0, 0.0], range: 700, angle: Math.PI / 2, isHost: false},
-        {location: [400.0, 700.0, 0.0], range: 700, angle: -Math.PI / 2, isHost: false}]
+    1: [{location: [100.0, 400.0, 0.0], range: 700, angle: 0}],
+    2: [{location: [100.0, 400.0, 0.0], range: 700, angle: 0},
+        {location: [700.0, 400.0, 0.0], range: 700, angle: Math.PI}],
+    3: [{location: [400.0, 600.0, 0.0], range: 600, angle: -Math.PI / 2},
+        {location: [250.0, 300.0, 0.0], range: 600, angle: Math.PI / 6},
+        {location: [550.0, 300.0, 0.0], range: 600, angle: Math.PI * 5 / 6}],
+    4: [{location: [100.0, 400.0, 0.0], range: 700, angle: 0},
+        {location: [700.0, 400.0, 0.0], range: 700, angle: Math.PI},
+        {location: [400.0, 100.0, 0.0], range: 700, angle: Math.PI / 2},
+        {location: [400.0, 700.0, 0.0], range: 700, angle: -Math.PI / 2}]
 };
 
 

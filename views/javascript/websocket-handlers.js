@@ -21,7 +21,6 @@ const initWebSocketHandlers = (players, currentPlayerId, initBuffers, printScore
             playerMsg.nickname,
             playerMsg.range,
             playerMsg.score,
-            playerMsg.isHost,
             playerMsg.isAlive);
         initBuffers(player);
         return player;
@@ -66,9 +65,11 @@ const initWebSocketHandlers = (players, currentPlayerId, initBuffers, printScore
     });
 
     socket.on('ball-sync', (msg) => {
-        ball.velocity = msg.velocity;
-        ball.location = msg.location;
-        ball.mvMatrix = mat4.fromValues(...Object.values(msg.mvMatrix));
+        if(msg.playerId !== currentPlayerId) {
+            ball.velocity = msg.ball.velocity;
+            ball.location = msg.ball.location;
+            ball.mvMatrix = mat4.fromValues(...Object.values(msg.ball.mvMatrix));
+        }
     });
 
     socket.on('ping-response', (msg) => {

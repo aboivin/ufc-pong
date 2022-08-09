@@ -68,12 +68,6 @@ const loadGame = () => {
     gl.clearColor(0.1875, 0.1875, 0.1875, 1.0);
     gl.enable(gl.DEPTH_TEST);
 
-    setInterval(() => {
-        if (players[currentPlayerId] != null && players[currentPlayerId].isHost) {
-            // wsEmitBallLocation(ball);
-        }
-    }, 500);
-
     tick();
     printScore(players);
 };
