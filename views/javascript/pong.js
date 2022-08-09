@@ -63,6 +63,7 @@ const loadGame = () => {
     initBall();
     initKeyBinding(players, currentPlayerId);
     initWebSocketHandlers(players, currentPlayerId, initBuffers, printScore);
+    initPing();
 
     gl.clearColor(0.1875, 0.1875, 0.1875, 1.0);
     gl.enable(gl.DEPTH_TEST);

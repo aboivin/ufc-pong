@@ -15,7 +15,7 @@ class Ball {
         this.computeVertices = () => {
             const vertices = [0, 0];
 
-            const ballEdges = 100;
+            const ballEdges = 60;
             for (let i = 0; i <= ballEdges; i++) {
                 vertices.push(Math.cos(i * 2 * Math.PI / ballEdges) * this.radius);
                 vertices.push(Math.sin(i * 2 * Math.PI / ballEdges) * this.radius);

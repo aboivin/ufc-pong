@@ -1,6 +1,6 @@
 runtime: nodejs
 env: flex
-service: ufc-pong
+service: default
 
 manual_scaling:
   instances: 1

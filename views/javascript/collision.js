@@ -1,4 +1,4 @@
-const ACCELERATION = 1.1;
+const ACCELERATION = 1.03;
 const ELIMINATION_DISTANCE = 20;
 
 const handleBallWithPlayerCollision = (player, ball, direction) => {

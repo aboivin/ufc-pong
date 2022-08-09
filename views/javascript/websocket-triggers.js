@@ -1,8 +1,8 @@
-const wsEmitMove = (player, direction) => {
+const wsEmitMove = (player) => {
     socket.emit('player-location', {
         id: player.id,
         location: player.location,
-        direction
+        direction: player.direction,
     });
 };
 
@@ -24,4 +24,8 @@ const wsEmitNewGame = () => {
 
 const wsEmitJoin = (nickname) => {
     socket.emit('join', {id: currentPlayerId, nickname});
+};
+
+const wsEmitPing = () => {
+    socket.emit('ping-request', { time: new Date().getTime() });
 };

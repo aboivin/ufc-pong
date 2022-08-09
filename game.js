@@ -19,6 +19,7 @@ class Game {
             this.listenToBallLocation(socket);
             this.listenToJoin(socket);
             this.listenToDisconnect(io, socket);
+            this.listenToPlayerPing(socket);
         });
 
         setInterval(() => this.gameRoom.emit('players-sync', this.players), 1000);
@@ -63,6 +64,13 @@ class Game {
             // console.log('player-location', msg);
             this.players[msg.id] = {...this.players[msg.id], ...msg};
             this.gameRoom.emit('players-sync', this.players);
+        });
+    }
+
+    listenToPlayerPing(socket) {
+        socket.on('ping-request', msg => {
+            console.log('ping received', msg);
+            socket.emit('ping-response', msg);
         });
     }
 

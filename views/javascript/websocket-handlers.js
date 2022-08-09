@@ -6,6 +6,10 @@ function displayCountDown() {
 
 }
 
+const initPing = () => {
+    setInterval(() => wsEmitPing(), 1000);
+}
+
 const initWebSocketHandlers = (players, currentPlayerId, initBuffers, printScore) => {
 
     const createPlayer = (playerMsg) => {
@@ -65,5 +69,9 @@ const initWebSocketHandlers = (players, currentPlayerId, initBuffers, printScore
         ball.velocity = msg.velocity;
         ball.location = msg.location;
         ball.mvMatrix = mat4.fromValues(...Object.values(msg.mvMatrix));
+    });
+
+    socket.on('ping-response', (msg) => {
+        document.getElementById("ping").innerHTML = (new Date().getTime() - msg.time).toString();
     });
 };

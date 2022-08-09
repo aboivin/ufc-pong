@@ -7,7 +7,7 @@ const handleKeyDown = (players, id, event) => {
     if (event.code === 'ArrowUp' && player.direction !== directions.BACKWARD ||
         event.code === 'ArrowDown' && player.direction !== directions.FORWARD) {
         player.direction = (event.ctrlKey || event.metaKey ? 3 : 1) * (event.code === 'ArrowUp' ? directions.BACKWARD : directions.FORWARD);
-        wsEmitMove(player, player.direction);
+        wsEmitMove(player);
     }
 };
 
@@ -19,7 +19,7 @@ const handleKeyUp = (players, id, event) => {
 
     if (event.code === 'ArrowUp' || event.code === 'ArrowDown') {
         player.direction = directions.PAUSE;
-        wsEmitMove(player, player.direction);
+        wsEmitMove(player);
     }
 };
 
