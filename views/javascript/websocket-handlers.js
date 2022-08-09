@@ -13,7 +13,6 @@ const initPing = () => {
 const initWebSocketHandlers = (players, currentPlayerId, initBuffers, printScore) => {
 
     const createPlayer = (playerMsg) => {
-        // console.log(playerMsg.location);
         const player = new Player(playerMsg.id,
             playerMsg.location,
             playerMsg.angle,

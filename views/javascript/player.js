@@ -8,7 +8,7 @@ class Player {
         this.height = 100;
         this.color = color;
         this.nickname = nickname;
-        this.velocity = 10.0;
+        this.velocity = 15.0;
         this.direction90Vector = vec2.rotate(vec3.fromValues(0, 0, 0), [0, 1], [0, 0], angle);
         this.direction = directions.PAUSE;
         this.angle = angle;
